@@ -26,6 +26,8 @@ pricecol = mydb["price"]
 
 scan = blockscancol.find_one()
 #print(scan)
+#C:\Users\mdans\AppData\Local\MongoDBCompass\MongoDBCompass.exe
+
 if scan == None:
     blockscancol.insert_one({"id": 1, "startblock": 0, "endblock": 0})
 price = pricecol.find_one()
@@ -34,8 +36,14 @@ if price == None:
     pricecol.insert_one({"id": 1, "name": "Biten", "symbol": "BTN",
                         "price": "0", "change24": "0", "change1h": "0"})
 
-w3 = Web3(Web3.WebsocketProvider(config["ws_provider"]))
-print(w3.is_connected())
+	
+
+try:
+   w3 = Web3(Web3.WebsocketProvider(config["ws_provider"]))
+   print(w3.is_connected())
+except:
+    print("ws error")   
+						
 
 
 @app.route('/', methods=["POST", "GET"])
