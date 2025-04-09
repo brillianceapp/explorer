@@ -1,0 +1,207 @@
+{% include("layout/header.html") %}
+
+    <div class="blockpage">
+        <h3>Blocks</h3>
+        <p class="featurelink">Featured: Build Precise & Reliable Apps with  {{name}} APIs. <a href="/">Learn
+                    More!</a></p>
+
+        <script type="text/babel">
+            var name = "{{symbol}}";
+            var baseBlockReward = parseFloat("{{baseBlockReward}}");
+            function getTrxfee(trx) {
+                var fee = 0;
+                trx.forEach(function (item, index) {
+                    var gasfees = (item.gas * parseFloat(item.gasPrice)) / 1000000000000000000;
+                    fee += gasfees;
+                })
+                return fee;
+            }
+            class Blocks extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        data: [],
+                        loader: true,
+                        lastblock: 0,
+                        from: 0,
+                        to: 0,
+                        page: 1,
+                        limit: 25,
+                    }
+                }
+
+                async componentDidMount() {
+                    const search = await window.location.search;
+                    const params = new URLSearchParams(search);
+                    const p = await params.get('p');
+                    const l = await params.get('limit');
+                    if (p) {
+                        await this.setState({ page: p })
+                    }
+                    if (l) {
+                        await this.setState({ limit: l })
+                    }
+                    await axios.get("/api/blocks?limit=" + this.state.limit + "&sort=desc" + "&page=" + this.state.page)
+                        .then(res => {
+                            this.setState({ data: res.data, loader: false })
+                            if (res.data.length > 0) {
+                                this.setState({ from: res.data[res.data.length - 1].number, to: res.data[0].number })
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    await axios.get("/api/block-count")
+                        .then(res => {
+                            if (res.data.number !== undefined) {
+                                this.setState({ lastblock: res.data.number })
+                            }
+                            //console.log(res.data.number)
+                        })
+                        .catch(err => {
+                            //
+                        })
+
+                }
+
+                onLimit = (e) => {
+                    this.setState({ limit: e.target.value })
+                    this.componentDidMount()
+                }
+
+                render() {
+                    var smallerthen = "<";
+                    var geaterthen = ">";
+                    var total = parseInt(this.state.lastblock / this.state.limit);
+                    var page = this.state.page;
+                    var limit = this.state.limit;
+                    var nextpage = parseFloat(page) + 1;
+                    var prevpage = parseFloat(page) - 1;
+                    var blocks = this.state.data.map(res => {
+                        const trxfee = getTrxfee(res.transactions);
+                        const nephewReward = baseBlockReward / 32;
+                        const uncleCount = res.uncles.length;
+                        const totalNephewReward = uncleCount * nephewReward;
+                        var reward = baseBlockReward + totalNephewReward + trxfee;
+                        var localTime = moment.utc(res.timestamp * 1000).toDate();
+
+                        return (
+                            <tr>
+                                <td><a href={"/block/" + res.number}>{res.number}</a></td>
+                                <td>{moment(localTime).fromNow()}</td>
+                                <td>{res.transactions.length}</td>
+                                <td><a href={"/address/" + res.miner}>{res.miner.substring(0, 20)}...</a></td>
+                                <td>{res.gasUsed.toLocaleString("en-US")}</td>
+                                <td>{res.gasLimit.toLocaleString("en-US")}</td>
+                                <td>{reward} {name}</td>
+                            </tr>
+                        )
+                    })
+                    return (
+
+                        <React.Fragment>
+                            <div className="blocks">
+                                <div className="blockspaginate">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <p>Block #{this.state.from} to #{this.state.to} (Total of {this.state.lastblock.toLocaleString("en-US")} blocks)</p>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                {
+                                                    page > 1 ? <React.Fragment>
+                                                        <li><a href={"/blocks"}>First</a></li>
+                                                        <li><a href={"/blocks?p=" + prevpage + "&limit=" + limit}>{smallerthen}</a> </li>
+                                                    </React.Fragment> : ""
+                                                }
+                                                <li className="countpage">Page {this.state.page} of {parseInt(this.state.lastblock / this.state.limit)}</li>
+                                                {
+                                                    page < total ? <React.Fragment>
+                                                        <li><a href={"/blocks?p=" + nextpage + "&limit=" + limit} > {geaterthen} </a></li>
+                                                        <li><a href={"/blocks?p=" + total + "&limit=" + limit} > Last </a></li>
+                                                    </React.Fragment> : ""
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="table-responsive">
+                                    <table className="">
+                                        <tr>
+                                            <td className="blocktdhead">Block</td>
+                                            <td className="blocktdhead">Age</td>
+                                            <td className="blocktdhead">Txn</td>
+                                            <td className="blocktdhead">Miner</td>
+                                            <td className="blocktdhead">Gas Used</td>
+                                            <td className="blocktdhead">Gas Limit</td>
+                                            <td className="blocktdhead">Reward</td>
+                                        </tr>
+
+                                        {blocks}
+
+                                    </table>
+                                    {
+                                        this.state.loader == true ?
+                                            <div class="text-center">
+                                                <div class="spinner-border" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                            </div>
+                                            :
+                                            ""
+                                    }
+                                </div>
+
+                                <div className="blockspaginate">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="row mb-3">
+                                                <div className="col-md-1 pt-2 col-2">Show</div>
+                                                <div className="col-md-2 col-4">
+                                                    <select onChange={this.onLimit} className="form-select shadow-none" aria-label=".form-select-sm example">
+                                                        <option value="10">10</option>
+                                                        <option value="25" selected>25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-md-1 pt-2 col-2">Records</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <ul>
+                                                {
+                                                    page > 1 ? <React.Fragment>
+                                                        <li><a href={"/blocks"}>First</a></li>
+                                                        <li><a href={"/blocks?p=" + prevpage + "&limit=" + limit}>{smallerthen}</a> </li>
+                                                    </React.Fragment> : ""
+                                                }
+                                                <li className="countpage">Page {this.state.page} of {parseInt(this.state.lastblock / this.state.limit)}</li>
+                                                {
+                                                    page < total ? <React.Fragment>
+                                                        <li><a href={"/blocks?p=" + nextpage + "&limit=" + limit} > {geaterthen} </a></li>
+                                                        <li><a href={"/blocks?p=" + total + "&limit=" + limit} > Last </a></li>
+                                                    </React.Fragment> : ""
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </React.Fragment>
+
+                    )
+                }
+
+            }
+            ReactDOM.render(<Blocks />, document.getElementById('blockapp'));
+        </script>
+        <div id="blockapp"></div>
+
+    </div>
+
+    {% extends("layout/footer.html") %}

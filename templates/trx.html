@@ -1,0 +1,206 @@
+{% include("layout/header.html") %}
+
+    <div class="blockview">
+        <h3>Transaction Details</h3>
+        <script type="text/babel">
+            var hash = "{{hash}}"
+            class Trx extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        data: [],
+                        loader: true,
+                        block: [],
+                        price: 0,
+                        change1h: 0,
+                        change24: 0,
+                        blockHash: "",
+                        blockNumber: "", from: "", gas: "0", gasPrice: "0", to: "", hash: "", value: "", input: "",
+                        nonce: "", transactionIndex: "", gwei: "", gasFee: "", timestamp: new Date(),
+                    }
+                }
+                async componentDidMount() {
+                    await axios.get("/api/priceupdate")
+                        .then(res => {
+                            this.setState({ price: res.data.data["price"], change1h: res.data.data["change1h"], change24: res.data.data["change24"] })
+                            //console.log(res.data)
+                        })
+                        .catch(err => {
+                            //
+                        })
+                    await axios.get("/api/trx/" + hash)
+                        .then(res => {
+                            var val = res.data[0]
+                            this.setState({
+                                blockHash: val.blockHash, blockNumber: val.blockNumber,
+                                gas: val.gas, gasPrice: val.gasPrice, to: val.to, hash: val.hash, value: val.value,
+                                input: val.input, nonce: val.nonce, transactionIndex: val.transactionIndex, gwei: val.gwei,
+                                gasFee: val.gasFee,
+                                from: val.from, loader: false
+                            })
+                            axios.get("/api/block/" + res.data[0].blockNumber)
+                                .then(res1 => {
+                                    this.setState({ block: res1.data, timestamp: res1.data[0].timestamp * 1000, loader: false })
+                                    //console.log(res1.data)
+                                })
+                                .catch(err => {
+                                    //
+                                })
+                        })
+                        .catch(err => {
+                            //
+                        })
+
+                }
+                render() {
+                    var val = this.state
+                    var localTime = moment.utc(val.timestamp).toDate();
+                    return (
+                        <React.Fragment>
+                        {
+                            val.loader == true ?
+                                <div class="text-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div> :
+                                <div class="blockdetails">
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Transaction Hash:</p>
+                                            </div>
+                                            <div class="col-md-4"><p>{hash}</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Status:</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="blockstatus"><i class="fas fa-check"></i> Success</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Block:</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <a href={"/block/" + val.blockNumber}> {val.blockNumber}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Timestamp:</p>
+                                            </div>
+                                            <div class="col-md-4"><p>{moment(localTime).fromNow()}</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>From :</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <a href={"/address/" + val.from}>{val.from}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>To :</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <a href={"/address/" + val.to}>{val.to}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Value:</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>
+                                                    {val.value / 1000000000000000000} {name} (${(val.value / 1000000000000000000) * parseFloat(val.price)})
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Transaction Fee:</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    {val.gasFee} {name} (${(val.gasFee / 1000000000000000000) * parseFloat(val.price)})
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Gas Price:</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+
+                                                    {val.gasFee} {name} ({val.gwei} Gwei)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Gas Limit & Usage by Txn:</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    {val.gas} | {val.gasPrice}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="blockrow">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <p>Input Data:</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <textarea value={val.input} disabled class="w-100" cols="10" rows="2">
+
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                        }
+                        </React.Fragment>
+
+                    )
+                }
+            }
+            ReactDOM.render(<Trx />, document.getElementById('trx'));
+        </script>
+        <div id="trx"></div>
+    </div>
+
+    {% extends("layout/footer.html") %}

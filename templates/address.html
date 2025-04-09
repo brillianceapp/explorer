@@ -1,0 +1,152 @@
+{% include("layout/header.html") %}
+
+  <div class="addressview">
+    <h3><img src="/static/images/address.png" /> Address <span>{{address}}</span> <i onclick="copyText()"
+        class="fal fa-copy"></i> </h3>
+    <script>
+      function copyText() {
+        // Get the text field
+        var copyText = "{{address}}";
+        navigator.clipboard.writeText(copyText);
+        alert("Copied address : " + copyText);
+      }
+    </script>
+
+    <script type="text/babel">
+      var name = "{{symbol}}";
+      var addressval = "{{address}}";
+      class Address extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            transactions: [],
+            loader: true,
+            timestamp: new Date(),
+            balance: 0,
+            price: 0, change24h: 0, change1h: 0,
+          }
+        }
+        async componentDidMount() {
+
+          await axios.get("/api/priceupdate")
+            .then(res => {
+              //console.log(res)
+              var price = res.data.data["price"]
+              var change24 = res.data.data["change24"]
+              var change1h = res.data.data["change1h"]
+              this.setState({ price: price, change1h: change1h, change24: change24 })
+            })
+            .catch(errr => {
+              console.log(errr)
+            })
+
+          await axios.get("/api/account/" + addressval)
+            .then(res => {
+              this.setState({ balance: res.data.balance, loader: false })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+
+          await axios.get("/api/account/trx/" + addressval)
+            .then(res => {
+              this.setState({ transactions: res.data.trx, loader: false })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+
+        }
+        render() {
+          var val = this.state;
+          var balance = parseFloat(val.price) * val.balance;
+          var trx = val.transactions.map(res => {
+            var time = res.timeStamp * 1000;
+            var localTime = moment.utc(time).toDate();
+            var type = "";
+            if (res.from == addressval) {
+              type = "OUT"
+            }
+            if (res.to == addressval) {
+              type = "IN"
+            }
+            return (
+              <tr>
+                <td><a href={"/tx/" + res.hash}>{res.hash.substring(0, 20)}...</a></td>
+                <td><p class="trxmethod">Transfer</p></td>
+                <td><a href={"/block/" + res.blockNumber}>{res.blockNumber}</a></td>
+                <td>{moment(localTime).fromNow()}</td>
+                <td><a href={"/address/" + res.from}>{res.from == null ? res.from : res.from.substring(0, 20)}...</a></td>
+                <td><p className={type}>{type}</p></td>
+                <td><a href={"/address/" + res.to}>{res.to == null ? res.to : res.to.substring(0, 20)}...</a></td>
+                <td>{res.value / 1000000000000000000} {name}</td>
+                <td>{res.gasFee} {name}</td>
+              </tr>
+            )
+          })
+          return (
+            <React.Fragment>
+
+              {
+                this.state.loader == true ?
+                  <div class="text-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div> :
+                  <div class="cards">
+                    <h5>Overview</h5>
+                    <div class="listcard">
+                      <div class="row">
+                        <div class="col-md-2">Balance:</div>
+                        <div class="col-md-10">{val.balance} {name}</div>
+                      </div>
+                    </div>
+                    <div class="listcard listcardbottom">
+                      <div class="row">
+                        <div class="col-md-2">Ether Value:</div>
+                        <div class="col-md-10">${(balance).toFixed(balance > 0.99 ? 2 : 8)} (@ ${val.price}/{name})</div>
+                      </div>
+                    </div>
+
+                  </div>
+              }
+
+              <div class="blocks">
+                <div class="table-responsive">
+                  <table class="">
+                    <tr>
+                      <td class="blocktdhead">Txn Hash</td>
+                      <td class="blocktdhead">Method</td>
+                      <td class="blocktdhead">Block</td>
+                      <td class="blocktdhead">Age</td>
+                      <td class="blocktdhead">From</td>
+                      <td class="blocktdhead"></td>
+                      <td class="blocktdhead">To</td>
+                      <td class="blocktdhead">Value</td>
+                      <td class="blocktdhead">Txn Fee</td>
+                    </tr>
+                    {trx}
+                  </table>
+                  {
+                    this.state.loader == true ?
+                      <div class="text-center">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div> :
+                      val.transactions.length == 0 ? <p className="mt-5 text-center">Trandaction not found</p> : ""
+                  }
+                </div>
+              </div>
+            </React.Fragment>
+          )
+        }
+      }
+      ReactDOM.render(<Address />, document.getElementById('addressapp'));
+    </script>
+    <div id="addressapp"></div>
+
+    <br /><br /><br /><br />
+  </div>
+  {% include("layout/footer.html") %}

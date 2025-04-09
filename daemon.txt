@@ -1,0 +1,8 @@
+
+daemon : [detached from 2795918.pts-0.kococoin]
+scan : [detached from 3948733.pts-0.kococoin]
+
+screen -X -S 2796394 quit
+
+Congratulations,
+Bankcoin Cash 100002 Users Registered

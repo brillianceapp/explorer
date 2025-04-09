@@ -1,0 +1,364 @@
+{% include("layout/header.html") %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-5 mb-5">
+                <div class="api-docs">
+                    <h3>Explorer API Documentation</h3>
+                    <h6>All Blocks</h6>
+                    <p>
+                        This returns details about last 50 Blocks available Http Request
+                    </p>
+                    <p id="blocks"></p>
+                    <textarea>
+                     [
+                        {
+                          "difficulty": "131072",
+                          "extraData": "0xd883010a1a846765746888676f312e31382e35856c696e7578",
+                          "gasLimit": 30000000,
+                          "gasUsed": 0,
+                          "hash": "0xf1638b1ae51ecd95167e284ea9a43fcc2255af6fbfdac0c27ba6029689c1028e",
+                          "logsBloom": "0x00000000",
+                          "miner": "0x910ec9925DCe49B83923c9266dF58e694b740C36",
+                          "mixHash": "0xc2b0f7203af89b824d0dfa6d7702b26a328be2b4412f16d9596ca1273f7d9939",
+                          "nonce": "0x637e3936c61e8464",
+                          "number": 95687,
+                          "parentHash": "0xba56fdbe3c23e26878acff1f99dca0331081928ea006703abe36d5d9fdb24edd",
+                          "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                          "size": 540,
+                          "stateRoot": "0x89cd275f548c98d4db2a5e5e42252d3ddbb85a1db309acf0a4487545a334017a",
+                          "timestamp": 1671541030,
+                          "totalDifficulty": "37347175637",
+                          "transactions": [],
+                          "transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                          "uncles": []
+                        }
+                      ]
+                    </textarea>
+
+                    <h6>Single Block</h6>
+                    <p>
+                        This returns details about 1 Block By Hash or Block Number available Http Request
+                    </p>
+                    <p id="block"></p>
+                    <textarea>
+                     [
+                        {
+                          "difficulty": "131072",
+                          "extraData": "0xd883010a1a846765746888676f312e31382e35856c696e7578",
+                          "gasLimit": 30000000,
+                          "gasUsed": 0,
+                          "hash": "0xf1638b1ae51ecd95167e284ea9a43fcc2255af6fbfdac0c27ba6029689c1028e",
+                          "logsBloom": "0x00000000",
+                          "miner": "0x910ec9925DCe49B83923c9266dF58e694b740C36",
+                          "mixHash": "0xc2b0f7203af89b824d0dfa6d7702b26a328be2b4412f16d9596ca1273f7d9939",
+                          "nonce": "0x637e3936c61e8464",
+                          "number": 1,
+                          "parentHash": "0xba56fdbe3c23e26878acff1f99dca0331081928ea006703abe36d5d9fdb24edd",
+                          "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                          "size": 540,
+                          "stateRoot": "0x89cd275f548c98d4db2a5e5e42252d3ddbb85a1db309acf0a4487545a334017a",
+                          "timestamp": 1671541030,
+                          "totalDifficulty": "37347175637",
+                          "transactions": [],
+                          "transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                          "uncles": []
+                        }
+                      ]
+                    </textarea>
+
+                    <h6>Last Block</h6>
+                    <p>
+                        This returns details about 1 Block  Last Block Information available Http Request
+                    </p>
+                    <p id="latest"></p>
+                    <textarea>
+                     [
+                        {
+                          "difficulty": "131072",
+                          "extraData": "0xd883010a1a846765746888676f312e31382e35856c696e7578",
+                          "gasLimit": 30000000,
+                          "gasUsed": 0,
+                          "hash": "0xf1638b1ae51ecd95167e284ea9a43fcc2255af6fbfdac0c27ba6029689c1028e",
+                          "logsBloom": "0x00000000",
+                          "miner": "0x910ec9925DCe49B83923c9266dF58e694b740C36",
+                          "mixHash": "0xc2b0f7203af89b824d0dfa6d7702b26a328be2b4412f16d9596ca1273f7d9939",
+                          "nonce": "0x637e3936c61e8464",
+                          "number": 1,
+                          "parentHash": "0xba56fdbe3c23e26878acff1f99dca0331081928ea006703abe36d5d9fdb24edd",
+                          "receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                          "size": 540,
+                          "stateRoot": "0x89cd275f548c98d4db2a5e5e42252d3ddbb85a1db309acf0a4487545a334017a",
+                          "timestamp": 1671541030,
+                          "totalDifficulty": "37347175637",
+                          "transactions": [],
+                          "transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                          "uncles": []
+                        }
+                      ]
+                    </textarea>
+
+                    <h6>Block Number Count</h6>
+                    <p>
+                        This returns details about Block Height available Http Request
+                    </p>
+                    <p id="bkh"></p>
+                    <textarea>
+
+
+
+
+
+
+
+                        
+                        {
+                            "number": 95820
+                        }
+                    </textarea>
+
+                    <h6>All Transactions</h6>
+                    <p>
+                        This returns details about by default last 50 transactions available Http Request
+                    </p>
+                    <p id="trxs"></p>
+                    <textarea>
+
+
+                    [
+                        {
+                          "blockHash": "0xa79445a2c5386ce94ea21f98f0726f0d55a355fe6673376f7fdd52cce212b4c3",
+                          "blockNumber": 95602,
+                          "from": "0x9084eB76601aa9f88Be7E92a18cBCba23227EC5a",
+                          "gas": 21000,
+                          "gasPrice": "1000000000",
+                          "timeStamp": 1671538973,
+                          "to": "0xFbadF35AE7B81682Ca9455b4CD4f8988f2Be9b36",
+                          "hash": "0x3a0ec6068bf6d23661837df56445e26e4b6ddcba7e31c97fca98df1102255e7a",
+                          "value": "62955000000000000000000",
+                          "input": "0x",
+                          "nonce": 0,
+                          "transactionIndex": 0,
+                          "gwei": 1,
+                          "gasFee": 0.000021
+                        }
+                    ]
+                    </textarea>
+
+                    <h6>Single Transaction</h6>
+                    <p>
+                        This returns details about 1 Trx by trx hash available Http Request
+                    </p>
+                    <p id="trx"></p>
+                    <textarea>
+
+
+                    [
+                        {
+                          "blockHash": "0xa79445a2c5386ce94ea21f98f0726f0d55a355fe6673376f7fdd52cce212b4c3",
+                          "blockNumber": 95602,
+                          "from": "0x9084eB76601aa9f88Be7E92a18cBCba23227EC5a",
+                          "gas": 21000,
+                          "gasPrice": "1000000000",
+                          "timeStamp": 1671538973,
+                          "to": "0xFbadF35AE7B81682Ca9455b4CD4f8988f2Be9b36",
+                          "hash": "0x3a0ec6068bf6d23661837df56445e26e4b6ddcba7e31c97fca98df1102255e7a",
+                          "value": "62955000000000000000000",
+                          "input": "0x",
+                          "nonce": 0,
+                          "transactionIndex": 0,
+                          "gwei": 1,
+                          "gasFee": 0.000021
+                        }
+                    ]
+                    </textarea>
+
+                    <h6>All Pending Transactions</h6>
+                    <p>
+                        This returns details about Pending Transactions available Http Request
+                    </p>
+                    <p id="pending"></p>
+                    <textarea>
+                        
+                    [
+                        {
+                          "blockHash": null,
+                          "blockNumber": null,
+                          "from": "0x910ec9925DCe49B83923c9266dF58e694b740C36",
+                          "gas": 21000,
+                          "gasPrice": "1000000000",
+                          "hash": "0x4795c567c7598b5573ee067e004e4d6516ebe5856ea651af490093c2917cda50",
+                          "input": "0x",
+                          "nonce": 46,
+                          "to": "0xFbadF35AE7B81682Ca9455b4CD4f8988f2Be9b36",
+                          "transactionIndex": null,
+                          "value": "5000000000000000000",
+                          "type": 0,
+                          "chainId": "0xa6",
+                          "v": "0x170",
+                          "r": "0xae36064307e0bcabb3efa1db5b720486bc61c96d400e82d018b5ffe42a5e45dc",
+                          "s": "0x52a95ec6e0228199cf1ae01b8ad5594deb3d08fd3b17c37d399f8ee37af3864"
+                        }
+                    ]
+                    </textarea>
+                    
+                    <h6>Transactions Count</h6>
+                    <p>
+                        This returns details about All Transactions Count available Http Request
+                    </p>
+                    <p id="tc"></p>
+                    <textarea>
+
+
+
+
+
+
+
+
+                        {
+                            "trx": 16,
+                            "status": "Query Success"
+                        }
+                    </textarea>
+
+                    <h6>Address Balance Query</h6>
+                    <p>
+                        This returns details about 1 Address Balance available Http Request
+                    </p>
+                    <p id="account"></p>
+                    <textarea>
+
+
+
+
+
+                        {
+                            "status": "Success",
+                            "balance": 82.69223196600001,
+                            "decimalBalance": "82692231966000000000"
+                        }
+                    </textarea>
+
+                    <h6>Address Transactions History Query</h6>
+                    <p>
+                        This returns details about 1 Address Transactions available Http Request
+                    </p>
+                    <p id="accounttrx"></p>
+                    <textarea>
+                        {
+                            "status": "Success",
+                            "address": "0x9084eB76601aa9f88Be7E92a18cBCba23227EC5a",
+                            "trx": [
+                              {
+                                "blockHash": "0xa79445a2c5386ce94ea21f98f0726f0d55a355fe6673376f7fdd52cce212b4c3",
+                                "blockNumber": 95602,
+                                "from": "0x9084eB76601aa9f88Be7E92a18cBCba23227EC5a",
+                                "gas": 21000,
+                                "gasPrice": "1000000000",
+                                "timeStamp": 1671538973,
+                                "to": "0xFbadF35AE7B81682Ca9455b4CD4f8988f2Be9b36",
+                                "hash": "0x3a0ec6068bf6d23661837df56445e26e4b6ddcba7e31c97fca98df1102255e7a",
+                                "value": "62955000000000000000000",
+                                "input": "0x",
+                                "nonce": 0,
+                                "transactionIndex": 0,
+                                "gwei": 1,
+                                "gasFee": 0.000021
+                              }
+                            ]
+                          }
+                    </textarea>
+
+                    <h6>Coin Basic Information</h6>
+                    <p>
+                        This returns details about Coin Price Gas Price and Supply Info available Http Request
+                    </p>
+                    <p id="gasprice"></p>
+                    <textarea>
+
+
+
+
+                        {
+                            "gwei": 1,
+                            "gweidecimal": "1000000000",
+                            "eth": 0.000021,
+                            "price": "1.00",
+                            "change1h": "0.10",
+                            "change24": "0.10",
+                            "supply": 50000000,
+                            "csupply": 100000000,
+                            "symbol": "BTN"
+                        }
+                    </textarea>
+
+                    <h6>Coin RPC Information</h6>
+                    <p>
+                        This returns details about Coin RPC Info available Http Request
+                    </p>
+                    <p id="rpc"></p>
+                    <textarea>
+                        {
+                            "rpc-http": "http://84.46.247.245:8085",
+                            "rpc-socket": "ws://84.46.247.245:9091",
+                            "network-id": 166,
+                            "networt-name": "Biten Coin",
+                            "coin-name": "Biten",
+                            "symbol": "BTN",
+                            "decimal": 18,
+                            "price": "1.00",
+                            "change24": "0.10",
+                            "change1h": "0.10",
+                            "test_network": {
+                              "networt_name": "Test Biten Coin",
+                              "coinName": "Test Biten",
+                              "symbol": "TBTN",
+                              "decimal": 18,
+                              "networkid": 160,
+                              "http_provider": "http://localhost",
+                              "ws_provider": "ws://localhost"
+                            }
+                        }
+                    </textarea>
+
+                    <h6>Coin Supply Information</h6>
+                    <p>
+                        This returns details about Coin Total Supply Info available Http Request
+                    </p>
+                    <p id="supplyi"></p>
+
+                    <h6>Coin Circulating Supply Information</h6>
+                    <p>
+                        This returns details about Coin Current Circulating Supply Info available Http Request
+                    </p>
+                    <p id="ccsupply"></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var base_url = window.location.origin
+        console.log(base_url)
+        document.getElementById("blocks").innerText = "GET " + base_url + "/api/blocks?page=1&sort=desc&limit=50";
+        document.getElementById("block").innerText = "GET " + base_url + "/api/block/1";
+        document.getElementById("trxs").innerText = "GET " + base_url + "/api/trxs?page=1&sort=desc&limit=50";
+        document.getElementById("trx").innerText = "GET " + base_url + "/api/trx/0x3a0ec6068bf6d23661837df56445e26e4b6ddcba7e31c97fca98df1102255e7a";
+        document.getElementById("account").innerText = "GET " + base_url + "/api/account/0x9084eB76601aa9f88Be7E92a18cBCba23227EC5a";
+        document.getElementById("accounttrx").innerText = "GET " + base_url + "/api/account/trx/0x9084eB76601aa9f88Be7E92a18cBCba23227EC5a";
+        document.getElementById("gasprice").innerText = "GET " + base_url + "/api/getgasprice";
+        document.getElementById("rpc").innerText = "GET " + base_url + "/api/getrpc";
+        document.getElementById("latest").innerText = "GET " + base_url + "/api/latest-block";
+        document.getElementById("bkh").innerText = "GET " + base_url + "/api/block-count";
+        document.getElementById("bkh").innerText = "GET " + base_url + "/api/trx-count";
+        document.getElementById("pending").innerText = "GET " + base_url + "/api/pending-trx";
+        document.getElementById("supplyi").innerText = "GET " + base_url + "/api/supply";
+        document.getElementById("ccsupply").innerText = "GET " + base_url + "/api/csupply";
+    </script>
+
+    {% include("layout/footer.html") %}

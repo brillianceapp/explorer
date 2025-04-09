@@ -1,0 +1,26 @@
+{% include("layout/header.html") %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="rpc-docs">
+                <h5>{{ symbol }} Mainnet  RPC </h5>
+                <p>Base URL : {{ config.http_provider }} </p>
+                <p>Coin Name : {{ config.coinName }} </p>
+                <p>Coin Symbol : {{ config.symbol }} </p>
+                <p>Network Name : {{ config.networt_name }} </p>
+                <p>Chain ID : {{ config.networkid }} </p>
+                <br/>
+                <h5>{{ symbol }} Testnet  RPC  </h5>
+                <p>Base URL : {{ config.test_network.http_provider}} </p>
+                <p>Coin Name : {{ config.test_network.coinName }} </p>
+                <p>Coin Symbol : {{ config.test_network.symbol }} </p>
+                <p>Network Name : {{ config.test_network.networt_name }} </p>
+                <p>Chain ID : {{ config.test_network.networkid }} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% extends("layout/footer.html") %}

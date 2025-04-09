@@ -1,0 +1,100 @@
+{% include("layout/header.html") %}
+
+  <div class="blockpage">
+    <h3>Pending Transactions </h3>
+    <p class="featurelink">Featured: Build Precise & Reliable Apps with  {{name}} APIs. <a href="/">Learn More!</a>
+    </p>
+
+    <script type="text/babel">
+      var name = "{{symbol}}";
+      class Pending extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            data: [],
+            loader: true,
+            timestamp: 1671289676
+          }
+        }
+
+        async componentDidMount() {
+          this.setState({ timestamp: Date.now() })
+          await axios.get("/api/pending-trx")
+            .then(res => {
+              this.setState({ data: res.data, loader: false })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+
+        }
+
+        render() {
+          var pendingdata = this.state.data.map(res => {
+            var gwei = parseFloat(res.gasPrice) / 1000000000
+            return (
+              <tr>
+                <td><a href={"/tx/" + res.hash}>{res.hash.substring(0, 20)}...</a></td>
+                <td>{res.nonce}</td>
+                <td><p class="trxmethod">Transfer</p></td>
+                <td>{moment(this.state.timestamp).fromNow()}</td>
+                <td>{res.gas}</td>
+                <td>{gwei} Gwei</td>
+                <td><a href={"/address/" + res.from}>{res.from.substring(0, 20)}...</a></td>
+                <td><a href={"/address/" + res.to}>{res.to.substring(0, 20)}...</a></td>
+                <td>{res.value / 1000000000000000000} {name}</td>
+              </tr>
+            )
+          })
+          return (
+            <React.Fragment>
+
+              <div class="blocks pendingtrx">
+                <div class="blockspaginate">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p>A total of {this.state.data.length.toLocaleString("en-US")} pending txns found</p>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="">
+                    <tr>
+                      <td class="blocktdhead">Txn Hash</td>
+                      <td class="blocktdhead">Nonce</td>
+                      <td class="blocktdhead">Method</td>
+                      <td class="blocktdhead">Last Seen</td>
+                      <td class="blocktdhead">Gas Limit</td>
+                      <td class="blocktdhead">Gas Price</td>
+                      <td class="blocktdhead">From</td>
+                      <td class="blocktdhead">To</td>
+                      <td class="blocktdhead">Value</td>
+                    </tr>
+                    {pendingdata}
+                  </table>
+                  {
+                    this.state.loader == true ?
+                      <div class="text-center">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                      : this.state.data.length > 0 ? "" :
+                        <p className="text-center mt-5 mb-5">Pending Transactions not found</p>
+                  }
+                </div>
+              </div>
+            </React.Fragment>
+          )
+        }
+      }
+      ReactDOM.render(<Pending />, document.getElementById('pending'));
+    </script>
+    <div id="pending"></div>
+  </div>
+
+  {% extends("layout/footer.html") %}

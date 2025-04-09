@@ -1,0 +1,28 @@
+{
+    "supply": 800000000,
+    "csupply": 5000000,
+    "reserve": 700000000,
+    "networt_name": "Bankcoin Cash",
+    "coinName": "Bankcoin Cash",
+    "symbol": "BKC",
+    "decimal": 18,
+    "networkid": 1994100,
+    "baseBlockReward": 2,
+    "http_provider": "https://rpc.bankcoincash.org",
+    "ws_provider": "ws://95.216.200.67:9095",
+    "dbname": "bankcoin",
+    "livecoinwatchapi": "https://api.livecoinwatch.com/coins/single",
+    "x_api_key": "394bac29-70e9-4034-967d-845c921f1f95",
+    "coinpaprika":"https://api.coinpaprika.com/v1/tickers/btn-biten",
+    "currency_code": "USDT",
+    "test_network": {
+        "networt_name": "Bankcoin Cash Coin",
+        "coinName": "Test Bankcoin",
+        "symbol": "TBKC",
+        "decimal": 18,
+        "networkid": 105,
+        "http_provider": "",
+        "ws_provider": ""
+    }
+}
+

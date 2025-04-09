@@ -1,0 +1,165 @@
+@media only screen and (max-width: 600px) {
+    .menu{
+        padding-left: 0px;
+        padding-right: 0px;
+        display: inline-block;
+       }
+    .logo{
+        width: 50%;
+        height: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        display: inline-block;
+        padding-left: 20px;
+       }
+       .logo img{
+        width: auto;/*150px*/
+        height: 100%;
+        cursor: pointer;
+       }
+       .baricon{
+        display: block;
+        width: 50%;
+        float: right;
+        display: inline-block;
+        padding-right: 20px;
+       }
+       .baricon .fa-bars{
+        float: right;
+        padding-top: 18px;
+        font-size: 25px;
+        color: rgb(129, 125, 125);
+        cursor: pointer;
+       }
+       .navmenu{
+        display: none;
+       }
+       #menutoggle{
+        width: 100%!important;
+        height: auto!important;
+        float: left;
+        display: grid;
+        background-color: white;
+        padding-left: 20px;
+        display: none;
+       }
+       #menutoggle ul{
+        padding: 20px;
+        float: left;
+        padding: 0;
+      }
+      #menutoggle ul li{
+       list-style: none;
+       float: none;
+       font-size: 16px;
+       padding-left: 0px!important;
+       padding-top: 10px;
+       padding-bottom: 10px;
+       width: 100%!important;
+       background: white;
+     }
+     #menutoggle ul li a{
+      text-decoration: none;
+      color: rgb(95, 93, 93);
+    }
+    #menutoggle ul li a:hover{
+      color: #3498db;
+    }
+    .hometopbg h3{
+      font-size: 20px;
+      padding-top: 57px;
+    }
+    .searchhome{
+      height: 50px;
+      width: 100%;
+      background: white;
+      border-radius: 3px;
+      margin-top: 15px;
+    }
+    .searchhome .hselect{
+      display: none;
+    }
+    .searchhome .hinput{
+      width: 84%;
+    }
+    .searchhome .hsearch{
+      width: 16%;
+    }
+    .midbox{
+      border-left: none;
+      border-right: none;
+      padding-left: 12px;
+      padding-right: 0;
+    }
+    .midbox .cardinside{
+      padding-top: 20px;
+    }
+    .cardinside2{
+      border-bottom: 1px solid rgb(245, 245, 245);
+      height: 78px;
+    }
+    .cardbox{
+      height: 520px;
+    }
+    .cardbox p{
+      font-size: 12px;
+      padding-left: 0;
+    }
+    .chartarea{
+      padding-top: 25px;
+    }
+    .bk61{
+      padding-right: 11px;
+    }
+    .bk62{
+      padding-left: 11px;
+    }
+    .blockcard h5{
+      display: none;
+    }
+    .blockcard h6{
+      display: none;
+    }
+    .blockcard p{
+      font-size: 12px;
+    }
+    .txword{
+      display: block;
+    }
+    .txsecond{
+      display: none;
+    }
+    .blockspaginate ul{
+      width: 100%;
+      float: left;
+      margin-left: 0;
+      padding-left:0;
+      display: inline-block;
+    }
+    .blockspaginate ul li{
+      font-size: 11px;
+      margin-left: 2px;
+    }
+    .footer h5{
+      width: 100%;
+    }
+    .footerbottom ul{
+      float: left;
+    }
+    .footerbottom{
+      padding-top: 15px;
+      padding-bottom: 5px;
+    }
+    .footerbottom ul li{
+      padding-left: 0px;
+      padding-right: 15px;
+    }
+    .addressview h3{
+      font-size: 20px;
+    }
+    .addressview h3 span{
+      font-size: 13px;
+    }
+
+
+}

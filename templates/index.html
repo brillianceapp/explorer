@@ -1,0 +1,450 @@
+{% include 'layout/header.html' %}
+{% block content %}
+  <div class="hometopbg">
+    <h3>The {{name}} Blockchain Explorer</h3>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="searchhome">
+          <div class="hselect">
+            <select id="selectval">
+              <option selected value="">All Filters</option>
+              <option value="Addresses">Addresses</option>
+              <option value="Block">Block</option>
+              <option value="TrxHash">Trx Hash</option>
+            </select>
+          </div>
+          <div class="hinput"><input id="inputval" placeholder=" Search by Address / Txn Hash / Block / Token / Ens" />
+          </div>
+          <div class="hsearch" onclick="onSearch()">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      onSearch = () => {
+        var val = document.getElementById("inputval").value;
+        var selectval = document.getElementById("selectval").value;
+        if (val !== "") {
+          if (selectval == "") {
+            if (val.length == 42) {
+              window.location.href = "/address/" + val
+            }
+            if (val.length > 42) {
+              window.location.href = "/tx/" + val
+            }
+            if (val.length < 42) {
+              window.location.href = "/block/" + val
+            }
+          } else {
+            if (selectval == "Addresses") {
+              window.location.href = "/address/" + val
+            }
+            if (selectval == "TrxHash") {
+              window.location.href = "/tx/" + val
+            }
+            if (selectval == "Block") {
+              window.location.href = "/block/" + val
+            }
+          }
+        } else {
+          alert("Input value is required")
+        }
+      }
+    </script>
+    <p>Featured: Build Precise & Reliable Apps with {{name}} APIs. <a href="/">Learn More!</a></p>
+  </div>
+
+  <div class="homearea">
+
+    <div class="cardbox">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="cardinside">
+            <div class="row">
+              <div class="col-md-1 col-2">
+                <img src="{{url_for('static', filename='images/ethereum-1.svg')}}" />
+              </div>
+              <div class="col-md-9 col-10">
+                <p>
+                    {{ symbol }} PRICE
+                </p>
+                <p id="priceshow">$0 (0%)</p>
+              </div>
+            </div>
+          </div>
+          <div class="cardinside2">
+            <div class="row">
+              <div class="col-md-1 col-2">
+                <img src="{{url_for('static', filename='images/icon-8.svg')}}" />
+              </div>
+              <div class="col-md-9 col-10">
+                <p>
+                  MARKET CAP
+                </p>
+                <p id="marketcap">$0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 midbox">
+          <div class="cardinside">
+            <div class="row">
+              <div class="col-md-1 col-2">
+                <img src="{{url_for('static', filename='images/icon-2-1.svg')}}" />
+              </div>
+              <div class="col-md-6 col-5">
+                <p>
+                  TRANSACTIONS
+                </p>
+                <p id="trx-count"> 0 (13.7 TPS)</p>
+              </div>
+              <div class="col-md-5 col-5">
+                <p>
+                  MED GAS PRICE
+                </p>
+                <p id="gasset">
+                  1 Gwei ($0)
+                </p>
+                <script>
+                  var price = 0;
+                  var change24 =0;
+                  axios.get("/api/priceupdate")
+                    .then(res => {
+                      //console.log(res)
+                      price=res.data.data["price"]
+                      change24=res.data.data["change24"]
+                    })
+                    .catch(errr => {
+                      console.log(errr)
+                    })
+
+                  
+                  setTimeout(function(){
+                    axios.get("/api/getgasprice")
+                    .then(res => {
+                        setInterval(() => {
+                          var gastousd = (res.data.eth * price);
+                          var color = "";
+                          var ch24h = parseFloat(change24);
+                          if (ch24h > 0) {
+                            color = "green";
+                          } else {
+                            color = "red";
+                          }
+                          var chadd = ch24h > 0 ? "+" + ch24h : "" + ch24h;
+                          document.getElementById("gasset").innerHTML = res.data.gwei + " Gwei ($" + gastousd.toFixed(gastousd > 1 ? 2 : gastousd >= 0.05 ? 4 : 8) + ")"
+                          document.getElementById("priceshow").innerHTML = "$" + price + " <span style='color:" + color + ";'>" + "(" + chadd + "%)<span>";
+                          document.getElementById("marketcap").innerHTML = "$" + (parseFloat(price) * res.data.csupply).toLocaleString("en-US")
+                          //console.log(price)
+                        }, 1000)
+                    })
+                    .catch(errr => {
+                      console.log(errr)
+                    })
+                  },2000)
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="cardinside2">
+            <div class="row">
+              <div class="col-md-1 col-2">
+                <img src="{{url_for('static', filename='images/icon-51.svg')}}"  />
+              </div>
+              <div class="col-md-6 col-5">
+                <p>
+                  LAST FINALIZED BLOCK
+                </p>
+                <p id="blockn">
+                  0
+                </p>
+              </div>
+              <div class="col-md-5 col-5">
+                <p>
+                  LAST SAFE BLOCK
+                </p>
+                <p id="blockn1">
+                  0
+                </p>
+              </div>
+              <script>
+                axios.get("/api/block-count")
+                  .then(res => {
+                    document.getElementById("blockn").innerText = res.data.number - 20;
+                    document.getElementById("blockn1").innerText = res.data.number;
+                    //console.log(res.data.number)
+                  })
+                  .catch(err => {
+                    //
+                  })
+
+                axios.get("/api/trx-count")
+                  .then(res => {
+                    document.getElementById("trx-count").innerText = res.data.trx + " (13.7 TPS)";
+                    //console.log(res.data)
+                  })
+                  .catch(err => {
+                    //
+                  })
+
+              </script>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 chartarea">
+          <p>
+            {{name}} TRANSACTION HISTORY IN 14 DAYS
+          </p>
+          <div class="row">
+            <div class="col-md-2 col-2">
+              <br />
+              <p id="lasttrx">0</p><br /><br /><br /><br />
+              <p id="todaytrx">0</p>
+            </div>
+            <div class="col-md-10 col-10">
+              <div id="myChart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/babel">
+      var name = "{{ symbol }}";
+      var baseBlockReward = parseFloat("{{ baseBlockReward }}");
+      function getTrxfee(trx) {
+        var fee = 0;
+        trx.forEach(function (item, index) {
+          var gasfees = (item.gas * parseFloat(item.gasPrice)) / 1000000000000000000;
+          fee += gasfees;
+        })
+        return fee;
+      }
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            bdata: [],
+            tdata: [],
+            countt: 50,
+            loader: true,
+            trxloader: true
+          }
+        }
+        async componentDidMount() {
+          await axios.get("/api/blocks?limit=50")
+            .then(res => {
+              this.setState({ bdata: res.data, loader: false })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          await axios.get("/api/trxs?limit=25&sort=desc")
+            .then(res => {
+              this.setState({ tdata: res.data, trxloader: false })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+
+        render() {
+
+          const block = this.state.bdata.map(res => {
+            var localTime = moment.utc(res.timestamp * 1000).toDate();
+            const trxfee = getTrxfee(res.transactions);
+            const nephewReward = baseBlockReward / 32;
+            const uncleCount = res.uncles.length;
+            const totalNephewReward = uncleCount * nephewReward;
+            var reward = baseBlockReward + totalNephewReward + trxfee;
+            return (
+              <div className="blockcard">
+                <div className="row">
+                  <div className="col-md-1 col-0">
+                    <h5>Bk</h5>
+                  </div>
+                  <div className="col-md-3 col-9">
+                    <p><a href={"/block/" + res.number}>{res.number}</a></p>
+                    <p><span>{moment(localTime).fromNow()}</span></p>
+                  </div>
+                  <div className="col-md-5 col-8">
+                    <p>Fee Recipient <a href={"/address/" + res.miner}>{res.miner.substring(0, 20)}...</a></p>
+                    <p><a href={"/txs?block=" + res.number}>{res.transactions.length} txns</a> <span>{moment(localTime).fromNow()}</span></p>
+                  </div>
+                  <div className="col-md-3 col-4">
+                    <p className="ethval">{reward} {name}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })
+
+          const trx = this.state.tdata.map(res1 => {
+            var localTime = moment.utc(res1.timeStamp * 1000).toDate();
+            var val = res1.value / 1000000000000000000;
+            return (
+              <div className="blockcard">
+                <div className="row">
+                  <div className="col-md-1 col-0">
+                    <h6>Tx</h6>
+                  </div>
+                  <div className="col-md-3 col-12">
+                    <p><span className="txword">TX </span><a href={"/tx/" + res1.hash}>{res1.hash.substring(0, 15)}...</a></p>
+                    <p><span className="txsecond">{moment(localTime).fromNow()}</span></p>
+                  </div>
+                  <div className="col-md-5 col-8">
+                    <p>From <a href={"/address/" + res1.from}>{res1.from !== null ? res1.from.substring(0, 20) + "..." : "Null"}</a></p>
+                    <p>To <a href={"/address/" + res1.to}>{res1.to !== null ? res1.to.substring(0, 20) + "..." : "Null"}</a></p>
+                  </div>
+                  <div className="col-md-3 col-4">
+                    <p className="ethval">{(res1.value / 1000000000000000000).toFixed(val > 1 ? 2 : val == 0 ? 0 : 5)} {name}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })
+
+          return (
+            <React.Fragment>
+              <div className="row">
+                <div className="col-md-6 bk61">
+                  <div className="blockhome">
+                    <div className="blockheadtitle">
+                      <p>Latest Blocks</p>
+                    </div>
+                    <div className="blockcardhome">
+                      {
+                        this.state.loader == true ?
+                          <div class="text-center">
+                            <div class="spinner-border" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          </div> : block
+                      }
+                    </div>
+                    <div className="blockviewbtn">
+                      <a href="/blocks" className="btn btn-primary shadow-none w-100">View all blocks</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-6 bk62">
+                  <div className="blockhome">
+                    <div className="blockheadtitle">
+                      <p>Latest Transactions</p>
+                    </div>
+                    <div className="blockcardhome">
+                      {this.state.trxloader == true ?
+                        <div class="text-center">
+                          <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div> : trx}
+                    </div>
+
+                    <div className="blockviewbtn">
+                      <a href="/txs" className="btn btn-primary shadow-none w-100">View all transactions</a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+            </React.Fragment >
+          )
+        }
+
+      }
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+    <div id="app"></div>
+
+  </div>
+
+  <script>
+    const formatCash = n => {
+      if (n < 1e3) return n;
+      if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "K";
+      if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "M";
+      if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
+      if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
+    };
+
+    //console.log(formatCash(1200));
+    var data = [];
+    axios.get("/api/trx-chart")
+      .then(res => {
+        //console.log(res.data)
+        data = res.data;
+        data.sort(function(a, b) {
+        return new Date(a.time) - new Date(b.time);
+      });
+        if (res.data.length > 0) {
+          document.getElementById("todaytrx").innerText = formatCash(data[0].value);
+          document.getElementById("lasttrx").innerHTML = formatCash(data[data.length - 1].value);
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+
+    var chart = LightweightCharts.createChart(document.getElementById("myChart"), {
+
+      rightPriceScale: {
+        visible: false,
+        borderColor: '#ffffff',
+      },
+      leftPriceScale: {
+        visible: false,
+        borderColor: '#ffffff',
+      },
+      layout: {
+        backgroundColor: '#ffffff',
+        textColor: 'rgb(18, 22, 28)',
+      },
+      handleScale: {
+        pressedMouseMove: false
+      },
+      grid: {
+        horzLines: {
+          color: '#ffffff',
+          visible: false
+        },
+        vertLines: {
+          color: '#ffffff',
+          visible: false
+        },
+      },
+      crosshair: {
+        mode: LightweightCharts.CrosshairMode.Normal,
+      },
+      timeScale: {
+        borderColor: '#ffffff',
+      },
+      handleScroll: {
+        vertTouchDrag: false,
+      },
+    });
+
+    setInterval(() => {
+      chart.timeScale().fitContent();
+      chart.addLineSeries({
+        color: 'rgb(18, 22, 28)',
+        lineWidth: 1,
+        priceLineVisible: false
+      }).setData(data);
+    }, 2000)
+
+    this.resizeObserver = new ResizeObserver(entries => {
+      if (entries.length === 0 || entries[0].target !== document.getElementById('myChart')) { return; }
+      const newRect = entries[0].contentRect;
+      chart.applyOptions({ height: newRect.height, width: newRect.width });
+    })
+    this.resizeObserver.observe(document.getElementById("myChart"));
+
+  </script>
+  {% endblock %}
+{% extends 'layout/footer.html' %}

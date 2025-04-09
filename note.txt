@@ -1,0 +1,181 @@
+https://medium.com/cybermiles/running-a-quick-ethereum-private-network-for-experimentation-and-testing-6b1c23605bce
+
+https://www.youtube.com/watch?v=mnQrWtBnDaA
+https://www.geeksforgeeks.org/how-to-setup-your-own-private-ethereum-network/
+Bootnode
+https://devblogs.microsoft.com/cse/2018/06/01/creating-private-ethereum-consortium-kubernetes/
+https://www.researchgate.net/publication/361312595_Implementation_of_Private_Test_node_setup_Self-Like_Ethereum_Testnet
+
+//
+https://dev.to/yongchanghe/set-up-a-private-network-with-multiple-pcs-using-go-ethereum-geth-3gm6
+
+
+set gas fee
+https://besu.hyperledger.org/en/stable/private-networks/how-to/configure/free-gas/#2-set-the-contract-size
+
+//https://stackoverflow.com/questions/69463898/flag-provided-but-not-defined-rpc
+//https://ethereum.stackexchange.com/questions/25271/bind-address-is-already-in-use
+
+geth
+https://geth.ethereum.org/docs/interface/command-line-options
+
+//New Server Details
+
+Ip : 95.216.200.67
+Password : tEwptfh3cVVmTrJt7JgV
+ssh-keygen -R "95.216.200.67"
+
+Aapanel
+address : https://95.216.200.67:7800/ec9bf7e2
+username : djsxmy5u
+password : 99660c82
+
+
+//New Big Server 35k
+IPv4 : 37.27.62.60
+Username: root
+Password: tEwptfh3cVVmTrJt7JgV
+ssh-keygen -R "95.216.200.67"
+
+aaPanel Internal Address: https://37.27.62.60:37282/262d1923
+username: woex5svl
+password: 59bcb1ef
+
+Go ethereum
+
+sudo apt-get install software-properties-common
+
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo apt-get update
+sudo apt-get install ethereum
+sudo apt-get upgrade geth
+
+geth --datadir node1 account new
+puppeth
+node1 : 0x42b6016446390e3fF7aAC0eb9fE88072C1582e9D
+password : ansarulpass12345
+node2 : 0x79D6668502889A159DD739b7E92F52c9Dd338d09
+password : ansarulpass12345
+
+geth init --datadir node1 bankcoin.json
+geth init --datadir node2 bankcoin.json
+
+bootnode -genkey boot.key 
+bootnode -nodekey boot.key -addr 155.133.23.127:30301
+bootnode -nodekey boot.key
+
+https://ai.plainenglish.io/how-to-create-an-ethereum-private-network-with-geth-44faa9e53b7d
+https://webdevelop.pro/blog/how-set-ethereum-private-network/
+https://hackernoon.com/setup-your-own-private-proof-of-authority-ethereum-network-with-geth-9a0a3750cda8
+https://www.codementor.io/@jinji/installing-ethereum-on-a-vps-hwvobj5l7
+
+https://medium.com/@pradeep_thomas/how-to-setup-your-own-private-ethereum-network-f80bc6aea088
+
+//Final 
+geth init --datadir ./data ../bankcoin.json
+
+node1 : 0x42b6016446390e3fF7aAC0eb9fE88072C1582e9D
+password : ansarulpass12345
+node2 : 0x79D6668502889A159DD739b7E92F52c9Dd338d09
+password : ansarulpass12345
+
+bootnode -genkey boot.key 
+bootnode -nodekey boot.key
+Bootnode enode : enode://@127.0.0.1:0?discport=30301
+
+//New Server server.mbcash.org 23 block
+
+Node 1 [detached from 2794741.pts-0.kococoin]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9095 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8088 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1994100 --mine --miner.threads=1 --miner.etherbase=0xA8529E036bA192565fFaAa12A164f1c876056a42 
+enode: admin.addPeer("enode://7cb5e7ea764b9ac1f499cc87d20ab16bbcec67a1a62a605edfc60f29b139fb3846a6f6b4f3db6487015a4a66f50d5167eb55aee57c2309fc4f8a44683004f951@95.216.200.67:30301?discport=0")
+geth attach http://95.216.200.67:8088
+
+screen -X -S 283872 quit
+
+Node 2 [detached from 2943023.pts-0.server1]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9095 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8088 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1994100 --mine --miner.threads=1 --miner.etherbase=0xA8529E036bA192565fFaAa12A164f1c876056a42 
+enode: admin.addPeer("enode://a00ce848b7729992f03ace58fca6ad03535cedf144ede61b84221a38aa17104e0c8d2ddec3d5df43be33d1c7638ccea3e74aad3fa1b859eb83f4e419199bce24@167.235.194.131:30301?discport=0")
+geth attach http://167.235.194.131:8088
+
+
+Node 3  [detached from 280570.pts-0.Ubuntu-2004-focal-64-minimal-hwe] : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9095 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8088 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1994100 --mine --miner.threads=1 --miner.etherbase=0xA8529E036bA192565fFaAa12A164f1c876056a42 
+enode: admin.addPeer("enode://4c386792c7a4a6eacda91aed74ad14eaff19e3c708006bae1fb64e5891d27645c86f03d3a3ad1d62b11532c1120d25850450662b5a29ac245487f2061c1bd587@37.27.62.60:30301?discport=0")
+geth attach http://37.27.62.60:8088
+
+
+//End New Server server.mbcash.org
+
+geth attach node1/geth.ipc
+geth attach http://95.216.200.67:8088
+Once the Javascript console is running, check that the node is connected to one other peer (node 2):
+
+net.peerCount
+The details of this peer can also be queried and used to check that the peer really is Node 2:
+
+admin.peers
+eth.getBalance(eth.accounts[0])
+personal.unlockAccount(eth.accounts[0])
+
+web3.fromWei(eth.getBalance("0x42b6016446390e3fF7aAC0eb9fE88072C1582e9D"),"ether")
+web3.fromWei(eth.getBalance("0x79D6668502889A159DD739b7E92F52c9Dd338d09"),"ether")
+web3.fromWei(eth.getBalance(eth.coinbase),"ether")
+web3.fromWei(eth.getBalance("0x45c0B8b9c93B89DC0dEbA6ac09C53Cd2a86b1341"),"ether")
+web3.fromWei(eth.getBalance("0x45c0B8b9c93B89DC0dEbA6ac09C53Cd2a86b1341"),"ether")
+
+Because you ran geth as a daemon you can either:
+
+killall -HUP geth
+in one line, or get the pid with:
+
+ps ax | grep geth
+and kill it with kill
+
+kill -HUP <pid>
+
+
+geth attach node1/geth.ipc
+geth attach http://155.133.23.127:8088
+net.peerCount
+admin.peers
+miner.start(1)
+miner.stop()
+admin.nodeInfo
+net.listening
+
+eth.getBalance(eth.accounts[0])
+personal.unlockAccount(eth.accounts[0])
+web3.fromWei(eth.getBalance("0x2028D9badde3A30cdAf64B3744c46cf74dB67010"),"ether")
+web3.fromWei(eth.getBalance("0x2028D9badde3A30cdAf64B3744c46cf74dB67010"),"ether")
+web3.fromWei(eth.getBalance("0x2028D9badde3A30cdAf64B3744c46cf74dB67010"),"ether")
+web3.fromWei(eth.getBalance(eth.coinbase),"ether")
+eth.sendTransaction({from:eth.coinbase,to:"0x2028D9badde3A30cdAf64B3744c46cf74dB67010",value:web3.toWei(5,"ether")})
+
+sudo netstat -peanut
+
+//Screen
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-screen-on-an-ubuntu-cloud-server
+
+sudo apt update
+sudo apt install screen
+which screen
+screen
+
+Then type screen Press enter
+Run your command
+Press ctrl + A and D
+It will run forever in background
+
+screen -ls
+screen -X -S 500938 quit
+
+//supervisor
+https://hiddentao.com/archives/2016/05/04/setting-up-geth-ethereum-node-to-run-automatically-on-ubuntu
+set proxy
+https://medium.com/@mhmazrooei/how-to-setup-and-run-a-secure-ethereum-node-c7144cc3522d
+sudo ufw status verbose
+sudo ufw status
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 8088/tcp
+sudo ufw allow 8089/tcp
+sudo ufw delete 5
+
+

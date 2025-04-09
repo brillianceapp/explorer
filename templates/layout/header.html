@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/responsive.css')}}" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
+    crossorigin="anonymous"/>
+
+    <link rel="icon" href="{{url_for('static', filename='images/favicon.png')}}" />
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/babel.js')}}"></script>
+    <script crossorigin src="/static/js/react.production.min.js"></script>
+    <script crossorigin src="/static/js/react-dom.production.min.js"></script>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script type="text/javascript" charset="utf8" src="/static/js/notify.js"></script>
+    <script type="text/javascript" charset="utf8" src="{{url_for('static', filename='js/moment.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/chart.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.6.1/dist/lightweight-charts.standalone.production.js" integrity="sha256-L+5GBtkjmwnFa5zpzHPGwFXU3fkCAvzehkQrdfux1Ew=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+  </head>
+  <body>
+    {% block head %}
+    {% block title %}
+    <title>{{title}}</title>
+    {% endblock %}
+    {% endblock %}
+
+    <div class="menu">
+        <div class="logo">
+          <a href="/">
+            <img src="{{url_for('static', filename='images/logob.png')}}"/>
+           </a>
+        </div>
+        <div class="baricon">
+          <i onclick="menuClick()" class="fa fa-bars"></i>
+        </div>
+        <div class="navmenu">
+          {% include 'layout/navbar.html' %}
+        </div>
+    </div>
+    <div id="menutoggle" class="menumobile">
+      {% include 'layout/navbar.html' %}
+    </div>
+
+    <script>
+      function menuClick() {
+        var x = document.getElementById("menutoggle");
+        if (x.style.display == "none" || x.style.display == "") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+     </script>

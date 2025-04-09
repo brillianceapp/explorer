@@ -1,0 +1,241 @@
+{% include("layout/header.html") %}
+
+    <div class="blockview">
+        <h3>Block <span style="color: rgb(131, 127, 127);">#{{block}}</span></h3>
+        <script type="text/babel">
+            var number = "{{block}}";
+            var name = "{{symbol}}";
+            var baseBlockReward = parseFloat("{{baseBlockReward}}");
+            function getTrxfee(trx) {
+                var fee = 0;
+                trx.forEach(function (item, index) {
+                    var gasfees = (item.gas * parseFloat(item.gasPrice)) / 1000000000000000000;
+                    fee += gasfees;
+                })
+                return fee;
+            }
+            class Blockone extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        transactions: [],
+                        loader: true,
+                        timestamp: new Date(),
+                        miner: "", totalDifficulty: "", size: "", gasUsed: "", gasLimit: "",
+                        extraData: "", hash: "", parentHash: "", stateRoot: "", number: "",
+                        nonce: "", uncles: []
+                    }
+                }
+                async componentDidMount() {
+                    await axios.get("/api/block/" + number)
+                        .then(res => {
+                            var val = res.data[0]
+                            console.log(val)
+                            this.setState({
+                                timestamp: val.timestamp * 1000, transactions: val.transactions, miner: val.miner,
+                                totalDifficulty: val.totalDifficulty, size: val.size, gasUsed: val.gasUsed, gasLimit: val.gasLimit,
+                                extraData: val.extraData, hash: val.hash, parentHash: val.parentHash, stateRoot: val.stateRoot,
+                                number: val.number, nonce: val.nonce, uncles: val.uncles,
+                                loader: false
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+
+                }
+                render() {
+                    var val = this.state
+                    var localTime = moment.utc(val.timestamp).toDate();
+
+                    const trxfee = getTrxfee(val.transactions);
+                    const nephewReward = baseBlockReward / 32;
+                    const uncleCount = val.uncles.length;
+                    const totalNephewReward = uncleCount * nephewReward;
+                    var reward = baseBlockReward + totalNephewReward + trxfee;
+
+                    return (
+                        <React.Fragment>
+
+                            {
+                                this.state.loader == true ?
+                                    <div class="text-center">
+                                        <div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div> :
+                                    <div className="blockdetails">
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Block Height:</p>
+                                                </div>
+                                                <div className="col-md-4"><p className="fw-bold">{val.number}</p></div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Status:</p>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <p className="blockstatus"><i className="fas fa-check"></i> Finalized</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Timestamp:</p>
+                                                </div>
+                                                <div className="col-md-4"><p>{moment(localTime).fromNow()} </p></div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Transactions:</p>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <p className="trxcountonblock">
+                                                        <a href={"/txs?block=" + val.number}>{val.transactions.length} transactions</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Fee Recipient:</p>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <p>
+                                                        <a href={"/address/" + val.miner}>{val.miner}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Block Reward:</p>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <p>
+                                                        {reward} {name} ({baseBlockReward} + {totalNephewReward} + {trxfee})
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Total Difficulty:</p>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <p>
+                                                        {parseFloat(val.totalDifficulty).toLocaleString("en-US")}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Size:</p>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <p>
+                                                        {val.size.toLocaleString("en-US")} bytes
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Gas Used:</p>
+                                                </div>
+                                                <div className="col-md-4"><p>{val.gasUsed.toLocaleString("en-US")}   </p></div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Gas Limit:</p>
+                                                </div>
+                                                <div className="col-md-4"><p>{val.gasLimit.toLocaleString("en-US")}</p></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Extra Data:</p>
+                                                </div>
+                                                <div className="col-md-8"><p>{val.extraData}</p></div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Hash:</p>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <p>
+                                                        {val.hash}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Parent Hash:</p>
+                                                </div>
+                                                <div className="col-md-8">
+                                                    <p>
+                                                        <a href={"/block/" + val.parentHash}>{val.parentHash}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>StateRoot:</p>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <p>
+                                                        {val.stateRoot}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="blockrow">
+                                            <div className="row ">
+                                                <div className="col-md-3">
+                                                    <p>Nonce:</p>
+                                                </div>
+                                                <div className="col-md-4"><p>{val.nonce}</p></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                            }
+
+                        </React.Fragment>
+
+                    );
+                }
+            }
+
+            ReactDOM.render(<Blockone />, document.getElementById('blockapp'));
+        </script>
+
+        <div id="blockapp"></div>
+
+    </div>
+
+    {%- extends("layout/footer.html") %}

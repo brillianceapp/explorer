@@ -1,0 +1,684 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: rgb(248, 249, 250);
+  }
+   
+ .menu{
+  width: 100%;
+  height: 63px;
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: inline-block;
+ }
+.logo{
+  width: 20%;
+  height: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: inline-block;
+ }
+ .baricon{
+  display: none;
+ }
+.logo img{
+  width: auto;/*170*/
+  height: 100%;
+  cursor: pointer;
+ }
+.navmenu{
+  width: 80%;
+  height: 100%;
+  display: inline-block;
+  float: right;
+  display: block;
+ }
+
+ #menutoggle{
+  display: none;
+ }
+
+
+ .navmenu ul{
+   padding-top: 20px;
+   float: right;
+ }
+ .navmenu ul li{
+  list-style: none;
+  float: left;
+  font-size: 16px;
+  padding-left: 25px;
+}
+.navmenu ul li a{
+  text-decoration: none;
+  color: rgb(95, 93, 93);
+}
+.navmenu ul li a:hover{
+  color: #3498db;
+}
+
+.hometopbg{
+  background-image: url("/static/images/abstract-shapes-20.svg");
+  height: 300px;
+  width: 100%;
+  background-color: rgb(18, 22, 28);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.hometopbg h3{
+  color: white;
+  padding-top: 60px;
+  font-size: 24px;
+}
+.hometopbg p{
+  color: rgb(175, 174, 174);
+  padding-top: 16px;
+  font-size: 16px;
+}
+.hometopbg p a{
+  text-decoration: none;
+}
+.searchhome{
+  height: 55px;
+  width: 100%;
+  background: white;
+  border-radius: 5px;
+  margin-top: 14px;
+}
+.searchhome .hselect{
+  width: 17%;
+  height: 100%;
+  display: inline-block;
+}
+.searchhome .hselect select{
+  height: 100%;
+  width: 100%;
+  border: none;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-right: 1px solid rgb(224, 219, 219);
+  padding-right: 10px;
+}
+.searchhome .hselect select:focus{
+  outline: none;
+}
+.searchhome .hinput{
+  width: 75%;
+  height: 100%;
+  display: inline-block;
+}
+.searchhome .hinput input{
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.searchhome .hinput input:focus{
+  outline: none;
+}
+.searchhome .hsearch{
+  width: 7%;
+  height: 100%;
+  display: inline-block;
+  background: #3498db;
+  float: right;
+  padding-top: 20px;
+  text-align: center;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+.searchhome .hsearch .fa-search{
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.homearea{
+  width: 100%;
+  height: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.cardbox{
+  width: 100%;
+  height: 195px;
+  background-color: white;
+  border: 1px solid rgb(216, 213, 213);
+  border-radius: 7px;
+  position: relative;
+  top: -55px;
+  padding: 22px;
+}
+.midbox{
+  border-left: 1px solid rgb(245, 245, 245);
+  border-right: 1px solid rgb(245, 245, 245);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.cardinside{
+  height: 75px;
+  width: 100%;
+  border-bottom: 1px solid rgb(245, 245, 245);
+  padding-right: 20px;
+}
+.cardinside2{
+  height: 75px;
+  width: 100%;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+.cardbox img{
+  height: 38px;
+  width: 38px;
+}
+.cardbox p{
+  margin: 0;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  font-size: 13px;
+  color: rgb(87, 84, 84);
+}
+#myChart{
+  width: 100%;
+  height: 130px;
+  display: inline-block;
+  background-color: white;
+}
+.blockhome{
+  height: 560px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgb(224, 222, 222);
+  border-radius: 8px;
+  position: relative;
+  top:-34px;
+  margin-bottom: 20px;
+}
+.bk61{
+  padding-right: 8px;
+}
+.bk62{
+  padding-left: 8px;
+}
+.blockheadtitle{
+  width: 100%;
+  height: 55px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+}
+.blockheadtitle p{
+  font-size: 16px;
+  color: rgb(49, 48, 48);
+  font-weight: 600;
+  padding: 17px;
+}
+.blockviewbtn{
+  width: 100%;
+  height: 60px;
+  border-top: 1px solid rgb(224, 222, 222);
+  position: absolute;
+  bottom: 0;
+  padding: 17px;
+  padding-top: 15px;
+  z-index: 7;
+  background: white;
+}
+.blockviewbtn .btn-primary{
+  background-color: rgba(52,152,219,.1);
+  border-color: rgba(52,152,219,.1);
+  color: #3498db;
+  height: 30px;
+  padding: 5px;
+  font-size: 14px;
+}
+.blockviewbtn .btn-primary:hover{
+  background-color: #3498db;
+  border-color: #3498db;
+  color: white;
+}
+.blockcardhome{
+  padding: 16px;
+  padding-top: 5px;
+  height: 450px;
+  width: 100%;
+  overflow-x: hidden;  
+  overflow-y: auto;
+}
+.blockcard{
+  border-bottom:1px solid rgb(224, 222, 222);
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.blockcard h5{
+  background-color: rgb(241, 242, 244);
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  padding: 14px;
+  border-radius: 7px;
+  font-size: 16px;
+  display: block;
+}
+.blockcard h6{
+  background-color: rgb(241, 242, 244);
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  padding: 14px;
+  border-radius: 50%;
+  font-size: 16px;
+  display: block;
+}
+.blockcard a{
+  text-decoration: none;
+}
+.blockcard p{
+  padding-top: 5px;
+  margin-bottom: 5px;
+  color: rgb(78, 76, 76);
+}
+.blockcard span{
+  color: rgb(131, 126, 126);
+}
+.ethval{
+  float: right;
+  background: rgb(241, 242, 244);
+  color: rgb(119, 145, 185);
+  padding: 7px;
+  padding-top: 8px!important;
+  border-radius: 3px;
+}
+.txword{
+  display: none;
+}
+.txsecond{
+  display: block;
+}
+div {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+.blockpage{
+  padding: 20px;
+}
+.blockpage h3{
+  font-size: 23px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+}
+.blockpage .featurelink{
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+.blockpage .featurelink a{
+  text-decoration: none;
+}
+.blocks{
+  min-height: 300px;
+  max-height: auto;
+  width: 100%;
+  background: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  border: 1px solid rgb(241, 241, 241);
+  padding: 10px;
+}
+.blocks td{
+  height: 49px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.blocks td a{
+  text-decoration: none;
+  color: #3498db;
+}
+.blocktdhead{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+table td{
+  padding-left: 20px;
+}
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+  border: none;
+}
+
+#blockapp{
+  width: 100%;
+  height: 100%;
+}
+.blockspaginate{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.blockspaginate p{
+  color: rgb(161, 159, 159);
+  font-size: 16px;
+}
+.addressview .blocks td{
+  height: 49px;
+  padding-top: 15px;
+  padding-bottom: 0px;
+}
+.alltrx td{
+  height: 49px;
+  padding-top: 15px;
+  padding-bottom: 0px;
+}
+.pendingtrx td{
+  height: 49px;
+  padding-top: 15px;
+  padding-bottom: 0px;
+}
+.blockspaginate ul{
+  float: right;
+}
+.blockspaginate ul li{
+  list-style: none;
+  float: left;
+  background-color: rgb(234, 244, 251);
+  padding: 7px 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  color: rgb(87, 84, 84);
+  font-size: 13px;
+}
+.blockspaginate ul li a{
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  
+}
+.blockspaginate ul li .inactive{
+  color: rgb(70, 67, 67);
+}
+.blockspaginate ul li:hover{
+  background: #3498db;
+}
+.blockspaginate ul li:hover a{
+  color: white!important;
+}
+.blockspaginate ul .countpage:hover{
+  background-color: rgb(234, 244, 251);
+  color: rgb(87, 84, 84);
+}
+.footer{
+  background-image: url("/static/images/abstract-shapes-20.svg");
+  min-height: 300px;
+  max-height: auto;
+  width: 100%;
+  background-color: rgb(18, 22, 28);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.footer img{
+  height: 35px;
+  width: 35px;
+}
+.footer h3{
+  color: white;
+  font-size: 26px;
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+.footer p{
+  color: rgb(235, 231, 231);
+  margin-bottom: 10px;
+}
+.footer h5{
+  color: rgb(231, 228, 228);
+  font-size: 16px;
+  margin-top: 30px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgb(77, 75, 75);
+  width: 180px;
+}
+.footer ul{
+ padding-left: 0;
+}
+.footer ul li{
+  list-style: none;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+.footer ul li a{
+  color: rgb(187, 184, 184);
+  text-decoration: none;
+}
+.footer ul li a:hover{
+  color: rgb(240, 240, 240);
+}
+.footerbottom{
+  color: white;
+  border-top: 1px solid rgb(77, 75, 75);
+  margin-top: 10px;
+  position: relative;
+  bottom: 0;
+  padding-top: 25px;
+  padding-bottom: 5px;
+}
+.footerbottom ul{
+  float: right;
+}
+.footerbottom ul li{
+  float: left;
+  list-style: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 15px;
+}
+.footerbottom ul li .fab{
+  height: 30px;
+  width: 30px;
+  background: rgb(42, 48, 56);
+  border-radius: 50%;
+  color: white;
+  padding: 10px;
+  font-size: 12px;
+}
+.footerbottom ul li .fab:hover{
+  background: white;
+  color: black;
+}
+.trxmethod{
+  background: rgb(225, 237, 247);
+  padding: 5px 7px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  width: 70px;
+  min-width: 50px;
+  max-width: auto;
+}
+.blockview{
+  width: 100%;
+  min-height: 300px;
+  max-height: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.blockview h3{
+  padding-top: 20px;
+  font-size: 22px;
+  padding-bottom: 10px;
+}
+.blockdetails{
+  width: 100%;
+  min-height: 700px;
+  max-height: auto;
+  background-color: white;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid rgb(233, 230, 230);
+}
+.blockrow{
+  border-bottom: 1px solid rgb(240, 237, 237);
+  padding-top: 15px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+}
+.blockrow a{
+  text-decoration: none;
+}
+.blockstatus{
+  color: rgb(0, 201, 167);
+  background: rgb(229, 249, 246);
+  border-radius: 5px;
+  padding: 7px 10px;
+  width: 100px;
+  height: 30px;
+}
+.trxcountonblock a{
+  text-decoration: none;
+  background-color: rgb(225, 237, 247);
+  border-radius: 5px;
+  padding: 7px 10px;
+  width: auto;
+  height: 30px;
+}
+.errorpage{
+  background-image: url("/images/error-404.svg");
+  width: 100%;
+  height: 700px;
+  padding: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+.errorpage h3{
+  margin-top: 200px;
+  color: rgb(119, 131, 143);
+  font-size: 40px;
+}
+.errorpage p{
+  color: rgb(119, 131, 143);
+  font-size: 17px;
+}
+.addressview{
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+.addressview h3 img{
+ height: 22px;
+ width: 22px;
+ border-radius: 10px;
+}
+.addressview h3{
+  color: rgb(74, 87, 112);
+  font-size: 23px;
+  border-bottom: 1px solid rgb(233, 228, 228);
+  padding-bottom: 20px;
+  overflow-x: hidden;
+}
+.addressview h3 span{
+  color: rgb(107, 117, 134);
+  font-size: 19px;
+}
+.cards{
+  background-color: white;
+  width: 100%;
+  min-height: 150px;
+  max-height: auto;
+  border: 1px solid rgb(233, 228, 228);
+  border-radius: 10px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+.cards h5{
+  border-bottom:1px solid rgb(233, 228, 228);
+  padding: 15px;
+  font-size: 18px;
+}
+.cards .listcard{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  height: auto;
+  border-bottom:1px solid rgb(233, 228, 228);
+}
+.listcardbottom{
+  border-bottom: none!important;
+}
+.fa-copy{
+  cursor: pointer;
+  font-size: 10px;
+  background-color: rgb(221, 218, 218);
+  border-radius: 50%;
+  padding: 5px;
+  height: 20px;
+  width: 20px;
+  color: rgb(71, 70, 70);
+}
+.OUT{
+  background: rgb(240, 229, 201);
+  color: rgb(212, 161, 31);
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 10px;
+  padding-top: 7px;
+  font-weight: bold;
+}
+.IN{
+  background: rgb(196, 238, 233);
+  color: rgb(45, 164, 197);
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 10px;
+  padding-top: 7px;
+  font-weight: bold;
+}
+.rpc-docs{
+  padding: 20px;
+  background-color: rgb(255, 251, 251);
+  margin-top: 50px;
+  margin-bottom: 100px;
+  min-height: 350px;
+  max-height: auto;
+  border-radius: 5px;
+}
+.api-docs{
+  margin-bottom: 50px;
+}
+.rpc-docs p{
+  margin-bottom: 5px;
+  color: rgb(34, 33, 33);
+  font-size: 15px;
+  font-weight: 500;
+}
+.api-docs h3{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.api-docs h6{
+  font-size: 22px;
+  color: rgb(10, 114, 210);
+  margin-top: 50px;
+}
+.api-docs textarea{
+  width: 100%;
+  min-height: 350px;
+  max-height: auto;
+  background-color: rgb(26, 25, 25);
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+}

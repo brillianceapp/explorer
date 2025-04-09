@@ -1,0 +1,185 @@
+{% include("layout/header.html") %}
+
+    <div class="blockpage alltrx">
+        <h3>Transactions </h3>
+        <p class="featurelink">Featured: Build Precise & Reliable Apps with  {{name}} APIs. <a href="/">Learn
+                    More!</a>
+        </p>
+        <script type="text/babel">
+            var name = "{{symbol}}";
+            class Trx extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        data: [],
+                        loader: true,
+                        page: 1,
+                        limit: 25,
+                        trxcount: 0,
+                    }
+                }
+
+                async componentDidMount() {
+                    const search = await window.location.search;
+                    const params = new URLSearchParams(search);
+                    const p = await params.get('p');
+                    const l = await params.get('limit');
+                    if (p) {
+                        await this.setState({ page: p })
+                    }
+                    if (l) {
+                        await this.setState({ limit: l })
+                    }
+                    await axios.get("/api/trx-count")
+                        .then(res => {
+                            if (res.data.trx !== undefined) {
+                                this.setState({ trxcount: res.data.trx })
+                            }
+                        })
+                        .catch(err => {
+                            //
+                        })
+                    await axios.get("/api/trxs?limit=" + this.state.limit + "&sort=desc" + "&page=" + this.state.page)
+                        .then(res => {
+                            this.setState({ data: res.data, loader: false })
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+
+                }
+
+                onLimit = (e) => {
+                    this.setState({ limit: e.target.value })
+                    this.componentDidMount()
+                }
+
+                render() {
+                    var smallerthen = "<";
+                    var geaterthen = ">";
+                    var total = parseInt(this.state.trxcount / this.state.limit);
+                    var page = this.state.page;
+                    var limit = this.state.limit;
+                    var nextpage = parseFloat(page) + 1;
+                    var prevpage = parseFloat(page) - 1;
+
+                    var trxdata = this.state.data.map(res => {
+                        var localTime = moment.utc(res.timeStamp * 1000).toDate();
+                        return (
+                            <tr>
+                                <td><a href={"/tx/" + res.hash}>{res.hash.substring(0, 20)}...</a></td>
+                                <td><p class="trxmethod">Transfer</p></td>
+                                <td><a href={"/block/" + res.blockNumber}>{res.blockNumber}</a></td>
+                                <td>{moment(localTime).fromNow()}</td>
+                                <td><a href={"/address/" + res.from}>{res.from.substring(0, 20)}...</a></td>
+                                <td><a href={"/address/" + res.to}>{res.to.substring(0, 20)}...</a></td>
+                                <td>{res.value / 1000000000000000000} {name}</td>
+                                <td>{res.gasFee} {name}</td>
+                            </tr>
+                        )
+                    })
+                    return (
+                        <React.Fragment>
+                            <div class="blocks">
+                                <div class="blockspaginate">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>More than {geaterthen} {this.state.trxcount.toLocaleString("en-US")} transactions found</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul>
+                                                {
+                                                    page > 1 ? <React.Fragment>
+                                                        <li><a href={"/txs"}>First</a></li>
+                                                        <li><a href={"/txs?p=" + prevpage + "&limit=" + limit}>{smallerthen}</a> </li>
+                                                    </React.Fragment> : ""
+                                                }
+                                                <li className="countpage">Page {this.state.page} of {parseInt(this.state.trxcount / this.state.limit)}</li>
+                                                {
+                                                    page < total ? <React.Fragment>
+                                                        <li><a href={"/txs?p=" + nextpage + "&limit=" + limit} > {geaterthen} </a></li>
+                                                        <li><a href={"/txs?p=" + total + "&limit=" + limit} > Last </a></li>
+                                                    </React.Fragment> : ""
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="">
+                                        <tr>
+                                            <td class="blocktdhead">Txn Hash</td>
+                                            <td class="blocktdhead">Method</td>
+                                            <td class="blocktdhead">Block</td>
+                                            <td class="blocktdhead">Age</td>
+                                            <td class="blocktdhead">From</td>
+                                            <td class="blocktdhead">To</td>
+                                            <td class="blocktdhead">Value</td>
+                                            <td class="blocktdhead">Txn Fee</td>
+                                        </tr>
+
+                                        {trxdata}
+
+                                    </table>
+                                    {
+                                        this.state.loader == true ?
+                                            <div class="text-center">
+                                                <div class="spinner-border" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                            </div>
+                                            :this.state.data.length > 0 ? "" :
+                                            <p className="text-center mt-5 mb-5"> Transactions not found</p>
+                                    }
+                                    
+                                </div>
+
+                                <div class="blockspaginate">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row mb-3">
+                                                <div class="col-md-1 pt-2 col-2">Show</div>
+                                                <div class="col-md-2 col-4">
+                                                    <select onChange={this.onLimit} className="form-select shadow-none" aria-label=".form-select-sm example">
+                                                        <option value="10">10</option>
+                                                        <option value="25" selected>25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-1 pt-2 col-2">Records</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul>
+                                                {
+                                                    page > 1 ? <React.Fragment>
+                                                        <li><a href={"/txs"}>First</a></li>
+                                                        <li><a href={"/txs?p=" + prevpage + "&limit=" + limit}>{smallerthen}</a> </li>
+                                                    </React.Fragment> : ""
+                                                }
+                                                <li className="countpage">Page {this.state.page} of {parseInt(this.state.trxcount / this.state.limit)}</li>
+                                                {
+                                                    page < total ? <React.Fragment>
+                                                        <li><a href={"/txs?p=" + nextpage + "&limit=" + limit} > {geaterthen} </a></li>
+                                                        <li><a href={"/txs?p=" + total + "&limit=" + limit} > Last </a></li>
+                                                    </React.Fragment> : ""
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </React.Fragment>
+                    )
+                }
+            }
+            ReactDOM.render(<Trx />, document.getElementById('trxapp'));
+        </script>
+        <div id="trxapp"></div>
+
+    </div>
+
+    {% extends("layout/footer.html") %}
