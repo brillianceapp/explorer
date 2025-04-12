@@ -312,7 +312,7 @@ def trxone(hash):
             i = w3.eth.get_transaction(hash)
             td = {"blockHash": i["blockHash"].hex(), "blockNumber": i["blockNumber"], "from": i["from"],
                     "gas": i["gas"], "gasPrice": i["gasPrice"],"hash": i["hash"].hex(), 
-                    "input": i["input"],"nonce": i["nonce"], "to": i["to"], "transactionIndex": i["transactionIndex"],
+                    "input": "","nonce": i["nonce"], "to": i["to"], "transactionIndex": i["transactionIndex"],
                     "value": str(i["value"]), "type": i["type"], "chainId": "", "v": i["v"], "r": i["r"].hex(),
                     "s": i["s"].hex(), "gwei": float(i["gasPrice"])/1000000000,
                     "gasFee": (i["gas"]*float(i["gasPrice"]))/1000000000000000000
@@ -399,4 +399,4 @@ def csupply():
 if __name__=="__main__":
     #socketio.start_background_task(backgroungdblock)
     #socketio.run(app,host='localhost', port=5000,debug=True)
-    app.run(host='0.0.0.0',port=5001,debug=False)
+    app.run(host='0.0.0.0',port=5001,debug=False,use_reloader=True,threaded= True)
