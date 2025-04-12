@@ -39,7 +39,7 @@ if price == None:
 	
 
 try:
-   w3 = Web3(Web3.WebsocketProvider(config["ws_provider"]))
+   w3 = Web3(Web3.HTTPProvider(config["http_provider"]))
    print(w3.is_connected())
 except:
     print("ws error")   

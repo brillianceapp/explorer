@@ -26,7 +26,7 @@ if price == None:
     pricecol.insert_one({"id": 1, "name": "Biten", "symbol": "BTN",
                         "price": "0", "change24": "0", "change1h": "0"})
     
-w3 = Web3(Web3.WebsocketProvider(config["ws_provider"]))
+w3 = Web3(Web3.HTTPProvider(config["http_provider"]))
 def backgroungdblock():
     while True:
         startblock = blockscancol.find_one({"id": 1})
@@ -48,7 +48,7 @@ def backgroungdblock():
                 for i in bb['transactions']:
                     td = {"blockHash": i["blockHash"].hex(), "blockNumber": i["blockNumber"], "from": i["from"],
                     "gas": i["gas"], "gasPrice": i["gasPrice"], "timeStamp": bb["timestamp"], "hash": i["hash"].hex(),
-                    "input": i["input"], "nonce": i["nonce"], "to": i["to"], "transactionIndex": i["transactionIndex"],
+                    "input": "", "nonce": i["nonce"], "to": i["to"], "transactionIndex": i["transactionIndex"],
                     "value": str(i["value"]), "type": i["type"], "chainId": "", "v": i["v"], "r": i["r"].hex(),
                     "s": i["s"].hex(), "gwei": float(i["gasPrice"])/1000000000,
                     "gasFee": (i["gas"]*float(i["gasPrice"]))/1000000000000000000
@@ -98,7 +98,7 @@ def latest():
                 for i in bb['transactions']:
                     td = {"blockHash": i["blockHash"].hex(), "blockNumber": i["blockNumber"], "from": i["from"],
                     "gas": i["gas"], "gasPrice": i["gasPrice"], "timeStamp": bb["timestamp"], "hash": i["hash"].hex(),
-                    "input": i["input"], "nonce": i["nonce"], "to": i["to"], "transactionIndex": i["transactionIndex"],
+                    "input": "", "nonce": i["nonce"], "to": i["to"], "transactionIndex": i["transactionIndex"],
                     "value": str(i["value"]), "type": i["type"], "chainId": "", "v": i["v"], "r": i["r"].hex(),
                     "s": i["s"].hex(), "gwei": float(i["gasPrice"])/1000000000,
                     "gasFee": (i["gas"]*float(i["gasPrice"]))/1000000000000000000
