@@ -1,8 +1,6 @@
 
-daemon : 
-scan : 
+daemon : [detached from 125616.pts-0.mail]
+scan : [detached from 125365.pts-0.mail]
 
-screen -X -S 2796394 quit
+screen -X -S 124505 quit
 
-Congratulations,
-Bankcoin Cash 100002 Users Registered

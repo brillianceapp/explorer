@@ -178,6 +178,8 @@ sudo ufw allow https
 sudo ufw allow 8080/tcp
 sudo ufw allow 9090/tcp
 sudo ufw allow 30301/tcp
+sudo ufw allow 5000/tcp
+sudo ufw allow 5001/tcp
 sudo ufw delete 5
 
 
