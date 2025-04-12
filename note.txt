@@ -57,8 +57,8 @@ password : ansarulpass12345
 node2 : 0x79D6668502889A159DD739b7E92F52c9Dd338d09
 password : ansarulpass12345
 
-geth init --datadir node1 bankcoin.json
-geth init --datadir node2 bankcoin.json
+geth init --datadir node1 brilliance.json
+geth init --datadir node2 brilliance.json
 
 bootnode -genkey boot.key 
 bootnode -nodekey boot.key -addr 155.133.23.127:30301
@@ -72,7 +72,7 @@ https://www.codementor.io/@jinji/installing-ethereum-on-a-vps-hwvobj5l7
 https://medium.com/@pradeep_thomas/how-to-setup-your-own-private-ethereum-network-f80bc6aea088
 
 //Final 
-geth init --datadir ./data ../bankcoin.json
+geth init --datadir ./data ../brilliance.json
 
 node1 : 0x42b6016446390e3fF7aAC0eb9fE88072C1582e9D
 password : ansarulpass12345
@@ -85,20 +85,21 @@ Bootnode enode : enode://@127.0.0.1:0?discport=30301
 
 //New Server server.mbcash.org 23 block
 
-Node 1 [detached from 2794741.pts-0.kococoin]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9095 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8088 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1994100 --mine --miner.threads=1 --miner.etherbase=0xA8529E036bA192565fFaAa12A164f1c876056a42 
-enode: admin.addPeer("enode://7cb5e7ea764b9ac1f499cc87d20ab16bbcec67a1a62a605edfc60f29b139fb3846a6f6b4f3db6487015a4a66f50d5167eb55aee57c2309fc4f8a44683004f951@95.216.200.67:30301?discport=0")
-geth attach http://95.216.200.67:8088
+Node 1 [detached from 122428.pts-0.mail]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
+enode: admin.addPeer("enode://5ce7863a1e942bcd9a70740c5cdf1831b9c36899f448297e1a90322eab097ea58f6431e5ac55bd195fda7032fcd73d768a6dc48eccc767c57d44e22e455c35bd@95.216.169.44:30301?discport=0")
+geth attach http://95.216.169.44:8080
 
 screen -X -S 283872 quit
 
-Node 2 [detached from 2943023.pts-0.server1]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9095 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8088 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1994100 --mine --miner.threads=1 --miner.etherbase=0xA8529E036bA192565fFaAa12A164f1c876056a42 
-enode: admin.addPeer("enode://a00ce848b7729992f03ace58fca6ad03535cedf144ede61b84221a38aa17104e0c8d2ddec3d5df43be33d1c7638ccea3e74aad3fa1b859eb83f4e419199bce24@167.235.194.131:30301?discport=0")
-geth attach http://167.235.194.131:8088
+Node 2 [detached from 1732722.pts-0.server] : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
+enode: admin.addPeer("enode://c6fa425a7ba5c36a00fb02db767035159447233f12faa7f387b8b9220b04813fd2d46cd57d6de4b513543d5ed5126fea25a89ab17ebd4bf20ef5ffa5cc699bb1@37.27.36.99:30301?discport=0")
+geth attach http://37.27.36.99:8080
 
 
-Node 3  [detached from 280570.pts-0.Ubuntu-2004-focal-64-minimal-hwe] : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9095 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8088 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1994100 --mine --miner.threads=1 --miner.etherbase=0xA8529E036bA192565fFaAa12A164f1c876056a42 
-enode: admin.addPeer("enode://4c386792c7a4a6eacda91aed74ad14eaff19e3c708006bae1fb64e5891d27645c86f03d3a3ad1d62b11532c1120d25850450662b5a29ac245487f2061c1bd587@37.27.62.60:30301?discport=0")
-geth attach http://37.27.62.60:8088
+Node 3 [detached from 903062.pts-0.Ubuntu-2004-focal-64-minimal-hwe] : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
+enode: admin.addPeer("enode://0ab5447b3a00e64bad0b7e7cae866cdf73a3cafa334bfb283676411edfb015735961e9809ac1016d3038ecc2f26a63984ae6795187cb2c17918799fb8ca9a7b2@37.27.53.37:30301?discport=0")
+geth attach http://37.27.53.37:8080
+
 
 
 //End New Server server.mbcash.org
@@ -174,8 +175,23 @@ sudo ufw status verbose
 sudo ufw status
 sudo ufw allow http
 sudo ufw allow https
-sudo ufw allow 8088/tcp
-sudo ufw allow 8089/tcp
+sudo ufw allow 8080/tcp
+sudo ufw allow 9090/tcp
+sudo ufw allow 30301/tcp
 sudo ufw delete 5
 
+
+sudo tar -xvf <filename>  
+In our case,
+
+sudo tar -xvf  geth-linux-amd64-1.10.15-8be800ff.tar.gz 
+Step into extracted folder
+
+cd geth-linux-amd64-1.10.15-8be800ff 
+It should contain the geth file, make it executable with the below command.
+
+sudo chmod +x geth
+
+Copy file to the user bin.
+sudo cp geth /usr/local/bin/
 

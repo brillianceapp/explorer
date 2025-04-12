@@ -1,6 +1,6 @@
 
-daemon : [detached from 2795918.pts-0.kococoin]
-scan : [detached from 3948733.pts-0.kococoin]
+daemon : 
+scan : 
 
 screen -X -S 2796394 quit
 

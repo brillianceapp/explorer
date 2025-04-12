@@ -6,7 +6,7 @@
     "coinName": "Brilliance Coin",
     "symbol": "BINC",
     "decimal": 18,
-    "networkid": 1022,
+    "networkid": 1020,
     "baseBlockReward": 2,
     "http_provider": "https://rpc.bankcoincash.org",
     "ws_provider": "ws://95.216.200.67:9095",
