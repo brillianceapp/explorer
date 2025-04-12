@@ -164,7 +164,7 @@ def block(blocks):
             for i in bb['transactions']:
                 td = {"blockHash": i["blockHash"].hex(), "blockNumber": i["blockNumber"], "from": i["from"].lower(),
                     "gas": i["gas"], "gasPrice": i["gasPrice"],"timeStamp":bb["timestamp"],"hash": i["hash"].hex(), 
-                    "input": i["input"],"nonce": i["nonce"], "to": i["to"].lower(), "transactionIndex": i["transactionIndex"],
+                    "input": "","nonce": i["nonce"], "to": i["to"].lower(), "transactionIndex": i["transactionIndex"],
                     "value": str(i["value"]), "type": i["type"], "chainId": "", "v": i["v"], "r": i["r"].hex(),
                     "s": i["s"].hex(), "gwei": float(i["gasPrice"])/1000000000,
                     "gasFee": (i["gas"]*float(i["gasPrice"]))/1000000000000000000
@@ -276,7 +276,7 @@ def blocklatest():
             for i in bb['transactions']:
                 td = {"blockHash": i["blockHash"].hex(), "blockNumber": i["blockNumber"], "from": i["from"].lower(),
                     "gas": i["gas"], "gasPrice": i["gasPrice"],"timeStamp":bb["timestamp"],"hash": i["hash"].hex(), 
-                    "input": i["input"],"nonce": i["nonce"], "to": i["to"].lower(), "transactionIndex": i["transactionIndex"],
+                    "input": "","nonce": i["nonce"], "to": i["to"].lower(), "transactionIndex": i["transactionIndex"],
                     "value": str(i["value"]), "type": i["type"], "chainId": "", "v": i["v"], "r": i["r"].hex(),
                     "s": i["s"].hex(), "gwei": float(i["gasPrice"])/1000000000,
                     "gasFee": (i["gas"]*float(i["gasPrice"]))/1000000000000000000
