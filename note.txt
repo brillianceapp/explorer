@@ -89,6 +89,11 @@ Node 1 [detached from 122428.pts-0.mail]  : geth --nodiscover --syncmode full --
 enode: admin.addPeer("enode://5ce7863a1e942bcd9a70740c5cdf1831b9c36899f448297e1a90322eab097ea58f6431e5ac55bd195fda7032fcd73d768a6dc48eccc767c57d44e22e455c35bd@95.216.169.44:30301?discport=0")
 geth attach http://95.216.169.44:8080
 
+
+Node 4 [detached from 69323.pts-1.vmi2582687]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
+enode: admin.addPeer("enode://5ce7863a1e942bcd9a70740c5cdf1831b9c36899f448297e1a90322eab097ea58f6431e5ac55bd195fda7032fcd73d768a6dc48eccc767c57d44e22e455c35bd@149.102.130.134:30301?discport=0")
+geth attach http://149.102.130.134:8080
+
 screen -X -S 283872 quit
 
 Node 2 [detached from 1732722.pts-0.server] : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
