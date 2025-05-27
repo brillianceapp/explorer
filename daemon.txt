@@ -1,6 +1,6 @@
 
-daemon : [detached from 129712.pts-0.mail]
-scan : [detached from 142286.pts-0.mail]
+daemon : [detached from 3097769.pts-0.vmi2582687]
+scan : [detached from 3097644.pts-0.vmi2582687]
 
-screen -X -S 140163 quit
+screen -X -S 3077849 quit
 
