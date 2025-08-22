@@ -93,8 +93,8 @@ enode: admin.addPeer("enode://8fae15dd7a335e16b2305a9874544b4ce75f40b86a6ea2ccde
 geth attach http://149.102.130.134:8080
 miner
 
-Node 2 [detached from 73433.pts-0.vmi2715516]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
-enode: admin.addPeer("enode://638d1f22a1ba2840b657cb60c368b3928e4476767ccdc86e94f9513bbc558e472ac3d880ceaaadbff08fd2473ac367757864d9d1170986cf60aeae4eb3ca60d2@144.91.91.214:30301?discport=0")
+Node 2 [detached from 28349.pts-0.coinbiten]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
+enode: admin.addPeer("enode://fad3a4ee320bcd17460ee067f4f8bfe5d069f49a9a6cb7689ba97417748071957925d4f8e62610421bd66678db3f72e9a3508e93c5570afa7399b181b1eb4432@144.91.91.214:30301?discport=0")
 geth attach http://144.91.91.214:8080
 Backup
 
