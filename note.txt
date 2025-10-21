@@ -85,11 +85,11 @@ Bootnode enode : enode://@127.0.0.1:0?discport=30301
 
 //New Server server.mbcash.org 23 block
 
-screen -X -S 148384 quit
+screen -X -S 15866 quit
 
 
-Node 1 [detached from 69323.pts-1.vmi2582687]  : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
-enode: admin.addPeer("enode://8fae15dd7a335e16b2305a9874544b4ce75f40b86a6ea2ccde8e822f4784d178790d9db8b41f306404f14d3c8b5bd408187768beba9e81a42454674e899a4226@149.102.130.134:30301?discport=0")
+Node 1 [detached from 16144.pts-0.vmi2582687] : geth --nodiscover --syncmode full --allow-insecure-unlock --ws --ws.addr 0.0.0.0 --ws.port 9090 --ws.rpcprefix "/" --ws.origins "*" --http.rpcprefix "/" --http --http.api eth,web3,miner,admin,personal,net,db --http.rpcprefix "/" --http.vhosts "*" --http.addr "0.0.0.0" --http.corsdomain "*" --http.port 8080 --nat "any" --http.api db,eth,web,web3,private,miner,admin,txpool,debug,personal,net --ipcpath /data/bkcnode/geth.ipc --datadir "./" --port 30301 --networkid 1020 --mine --miner.threads=1 --miner.etherbase=0x4E6eed647932e6389c09f5A7C380C0a0fB88c5ad
+enode: admin.addPeer("enode://621729af2600c7319f88972a82b396d8ccb150b643012ff2a8f7a9e66182d4f714cf78cb6b4c259ac2591f1a4324beacb8a831de1ef6d41276f506e33f8ba9d4@149.102.130.134:30301?discport=0")
 geth attach http://149.102.130.134:8080
 miner
 

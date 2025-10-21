@@ -1,6 +1,6 @@
 
-daemon : [detached from 3159820.pts-0.vmi2582687]
+daemon : [detached from 3512405.pts-0.vmi2582687]
 scan : [detached from 3097644.pts-0.vmi2582687]
 
-screen -X -S 2048194 quit
+screen -X -S 3159820 quit
 
